@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WayQuizz - Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+flex-direction:column;
+background:url("8.png") no-repeat center center/cover;
+}
+
+/* NAVBAR */
+nav{
+background:#141a2a;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+color:#6edbd5;
+font-size:24px;
+font-weight:700;
+}
+
+.logo img{
+height:40px;
+width:40px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.signup-btn{
+background:#6edbd5;
+color:#111;
+padding:8px 16px;
+border:none;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* CENTER CONTAINER */
+.container{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* GLASS CARD */
+.login-box{
+width:420px;
+padding:40px;
+border-radius:15px;
+background:rgba(0,0,0,0.45);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.2);
+color:white;
+text-align:center;
+}
+
+.login-box h2{
+margin-bottom:30px;
+font-size:28px;
+color:#f2e9b8;
+}
+
+/* INPUT GROUP */
+.input-group{
+position:relative;
+margin:20px 0;
+}
+
+.input-group input{
+width:100%;
+padding:12px 40px 12px 10px;
+background:transparent;
+border:none;
+border-bottom:1px solid #ccc;
+color:white;
+font-size:15px;
+outline:none;
+}
+
+.input-group span{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+color:#f2e9b8;
+font-size:18px;
+}
+
+/* OPTIONS */
+.options{
+display:flex;
+justify-content:space-between;
+font-size:14px;
+margin:15px 0;
+}
+
+.options a{
+color:#f2e9b8;
+text-decoration:none;
+}
+
+/* LOGIN BUTTON */
+.login-btn{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:6px;
+background:#63b7b6;
+font-weight:600;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.login-btn:hover{
+opacity:0.9;
+}
+
+/* DIVIDER */
+.divider{
+margin:25px 0;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.divider hr{
+flex:1;
+border:none;
+height:1px;
+background:#aaa;
+}
+
+.divider span{
+font-size:14px;
+}
+
+/* SOCIAL BUTTONS */
+.social{
+display:flex;
+justify-content:center;
+gap:15px;
+}
+
+.social button{
+width:45px;
+height:45px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:18px;
+background:#1e2433;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo"><img src="2.jpg" alt="WayQuizz Logo">WayQuizz</div>
+<a href="signup.html">
+<button class="signup-btn">Sign Up</button>
+</a>
+</nav>
+
+<div class="container">
+
+<div class="login-box">
+<h2>Welcome to WayQuizz</h2>
+
+<div class="input-group">
+<input type="text" placeholder="Full Name" id="name">
+<span>👤</span>
+</div>
+
+<div class="input-group">
+<input type="email" placeholder="Email" id="email">
+<span>✉</span>
+</div>
+
+<div class="input-group">
+<input type="password" placeholder="Password" id="password">
+<span>🔒</span>
+</div>
+
+<div class="options">
+<label><input type="checkbox"> Remember me</label>
+<a href="#">Forgot Password?</a>
+</div>
+
+<button class="login-btn" onclick="login()">Log in</button>
+
+<div class="divider">
+<hr><span>or continue with</span><hr>
+</div>
+
+<div class="social">
+<button>✉</button>
+<button></button>
+</div>
+        
+</div>
+</div>
+
+<script>
+function login(){
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+if(!name || !email || !password){
+alert("Please fill in all fields");
+return;
+}
+
+// Check if user exists in stored accounts
+let storedUser = JSON.parse(localStorage.getItem("user"));
+if(storedUser && storedUser.username === name && storedUser.email === email && storedUser.password === password){
+    // Set as current user for session
+    let currentUser = {name: storedUser.username, email: storedUser.email};
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    window.location.href="index.html";
+} else {
+    alert("Invalid credentials. Please check your information or sign up first.");
+}
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WayQuizz - Sign Up</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+background:url("8.png") no-repeat center center/cover;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.form-box{
+background:#2b3245;
+padding:40px;
+border-radius:12px;
+width:350px;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:none;
+border-radius:6px;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#6edbd5;
+border:none;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+}
+
+a{
+color:#6edbd5;
+text-decoration:none;
+display:block;
+margin-top:15px;
+}
+
+h2{
+font-size:32px;
+font-weight:700;
+margin-bottom:30px;
+color:#ffd700;
+}
+</style>
+</head>
+
+<body>
+
+    
+<div class="form-box">
+<h2>Welcome to WayQuizz</h2>
+
+<input type="text" id="username" placeholder="Username">
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="signup()">Sign Up</button>
+
+<a href="login.html">Already have an account? Login</a>
+</div>
+
+<script>
+function signup(){
+let username=document.getElementById("username").value;
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+if(username===""||email===""||password===""){
+alert("Please fill all fields");
+return;
+}
+
+let user={
+username:username,
+email:email,
+password:password
+};
+
+localStorage.setItem("user",JSON.stringify(user));
+
+alert("Account created successfully!");
+window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>
