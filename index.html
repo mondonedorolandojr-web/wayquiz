@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wayquizzz</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#2f364a;
+color:white;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* ================= NAVBAR ================= */
+nav{
+background:#141a2a;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 50px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo img{
+height:45px;
+border-radius:50%;
+background:white;
+padding:4px;
+}
+
+.logo span{
+font-size:24px;
+font-weight:700;
+color:#6edbd5;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:500;
+padding:6px 12px;
+border-radius:6px;
+}
+
+nav a.active{
+background:#f2e9b8;
+color:#111;
+}
+
+.logout{
+background:#63b7b6;
+color:#111;
+border:none;
+padding:8px 16px;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+}
+
+.login-btn{
+background:#6edbd5;
+color:#111;
+border:none;
+padding:8px 16px;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+text-decoration:none;
+display:inline-block;
+}
+
+.signup-btn{
+background:#f2e9b8;
+color:#111;
+border:none;
+padding:8px 16px;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+text-decoration:none;
+display:inline-block;
+}
+
+.welcome-msg{
+color:#f2e9b8;
+font-size:16px;
+font-weight:600;
+}
+
+/* ================= HERO ================= */
+.hero{
+height:380px;
+background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+url("8.png") center/cover no-repeat;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:48px;
+font-weight:700;
+color:black;
+}
+
+.hero p{
+margin-top:10px;
+font-size:20px;
+font-style:italic;
+color:black;
+}
+
+.hero-buttons{
+margin-top:25px;
+}
+
+.hero button{
+padding:14px 30px;
+margin:0 10px;
+border-radius:8px;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+border:none;
+}
+
+.start{
+background:#1b2236;
+color:white;
+}
+
+.learn{
+background:#9aa5a7;
+color:white;
+}
+
+/* Anchor-styled buttons (accessibility-friendly) */
+.hero a{
+display:inline-block;
+padding:14px 30px;
+margin:0 10px;
+border-radius:8px;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+text-decoration:none;
+}
+
+.hero a.start{
+background:#1b2236;
+color:white;
+}
+
+.hero a.learn{
+background:#9aa5a7;
+color:white;
+}
+
+/* ================= FEATURES ================= */
+.features{
+display:flex;
+justify-content:center;
+gap:25px;
+padding:40px 20px;
+}
+
+.feature{
+background:#63b7b6;
+padding:25px;
+border-radius:12px;
+width:300px;
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.feature h3{
+color:#f2e9b8;
+}
+
+.feature p{
+font-size:14px;
+}
+
+/* ================= SECTION TITLE ================= */
+.section-title{
+text-align:center;
+font-size:28px;
+margin:20px 0;
+position:relative;
+}
+
+.section-title::before,
+.section-title::after{
+content:"";
+position:absolute;
+top:50%;
+width:30%;
+height:2px;
+background:#aaa;
+}
+
+.section-title::before{
+left:0;
+}
+
+.section-title::after{
+right:0;
+}
+
+/* ================= CARDS ================= */
+.cards{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+padding:30px;
+}
+
+.card{
+background:#d8e3ec;
+color:#111;
+width:250px;
+padding:20px;
+border-radius:12px;
+text-align:center;
+}
+
+.card img{
+width:100%;
+border-radius:8px;
+}
+
+.card h3{
+margin:10px 0;
+}
+
+.card button{
+margin-top:10px;
+padding:10px 20px;
+border:none;
+background:#4b6ea9;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* Make card links look like buttons */
+.card a{
+display:inline-block;
+margin-top:10px;
+padding:10px 20px;
+background:#4b6ea9;
+color:white;
+border-radius:6px;
+text-decoration:none;
+}
+
+/* ================= FOOTER ================= */
+footer{
+background: linear-gradient(135deg, #63b7b6 0%, #5bb8b2 100%);
+padding:10px;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+margin-top:auto;
+box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+border-top: 1px solid #4a9a95;
+}
+
+footer h3{
+color:#fff;
+font-size:16px;
+font-weight:700;
+margin-bottom:10px;
+border-bottom: 2px solid #fff;
+padding-bottom:6px;
+text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+footer p{
+color:#f0f8f7;
+margin:6px 0;
+font-size:13px;
+line-height:1.4;
+}
+
+/* Get Started section in footer */
+.get-started-left{
+flex:1;
+text-align:left;
+margin-right:30px;
+max-width:280px;
+padding:12px;
+background: rgba(255,255,255,0.1);
+border-radius:8px;
+backdrop-filter: blur(5px);
+border: 1px solid rgba(255,255,255,0.2);
+}
+
+.get-started-left h3{
+color:#fff;
+font-size:18px;
+font-weight:700;
+margin-bottom:8px;
+text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.get-started-left p{
+color:#f0f8f7;
+font-size:13px;
+margin-bottom:12px;
+line-height:1.4;
+}
+
+.footer-columns{
+display:flex;
+gap:40px;
+align-items:flex-start;
+}
+
+.footer-columns div{
+min-width:140px;
+background: rgba(255,255,255,0.05);
+padding:10px;
+border-radius:6px;
+border: 1px solid rgba(255,255,255,0.1);
+}
+
+.get-started-btn{
+background: linear-gradient(135deg, #fff 0%, #f0f8f7 100%);
+color:#2c5f5a;
+padding:12px 24px;
+border:none;
+border-radius:20px;
+font-size:14px;
+font-weight:700;
+cursor:pointer;
+text-decoration:none;
+display:inline-block;
+transition: all 0.3s ease;
+box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.get-started-btn:hover{
+background: linear-gradient(135deg, #f0f8f7 0%, #e0f0ee 100%);
+transform:translateY(-2px);
+box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 15px;
+  }
+  
+  .get-started-left {
+    margin-right: 0;
+    margin-bottom: 20px;
+    max-width: 100%;
+    padding: 15px;
+  }
+  
+  .footer-columns {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .footer-columns div {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    padding: 15px 10px;
+  }
+  
+  .get-started-btn {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+<nav>
+<div class="logo">
+<a href="index.html"><img src="2.jpg"></a>
+<span>WayQuizz</span>
+</div>
+
+<ul>
+<li><a href="index.html" class="active">Home</a></li>
+<li><a href="quizzes.html">Quizzes</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+
+<div style="display:flex;align-items:center;gap:20px">
+<span class="welcome-msg" id="welcomeMsg"></span>
+<!-- Logged in state -->
+<div id="loggedInNav" style="display:none;">
+<button class="logout" onclick="logout()">Logout</button>
+</div>
+<!-- Logged out state -->
+<div id="loggedOutNav" style="display:none;">
+<a href="login.html" class="login-btn">Login</a>
+<a href="signup.html" class="signup-btn">Sign Up</a>
+</div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<h1>Welcome to WayQuizz!</h1>
+<p>Test your knowledge with fun quizzes.</p>
+
+<div class="hero-buttons">
+<a class="start" href="quizzes.html" role="button">Start Quiz</a>
+<a class="learn" href="about.html" role="button">Learn More</a>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+
+<div class="feature">
+<div>❓</div>
+<div>
+<h3>Popular Quizzes</h3>
+<p>Top quizzes to try</p>
+</div>
+</div>
+
+<div class="feature">
+<div>🔔</div>
+<div>
+<h3>How It Works</h3>
+<p>Learn how it works</p>
+</div>
+</div>
+
+<div class="feature">
+<div>📊</div>
+<div>
+<h3>Track Your Progress</h3>
+<p>Track Your Scores</p>
+</div>
+</div>
+
+</section>
+
+<h2 class="section-title">Featured Quizzes</h2>
+
+<section class="cards">
+
+<div class="card">
+<img src="3.jfif">
+<h3>Math</h3>
+<p>WE MATHIN'</p>
+<a href="math.html" role="button">Take quiz</a>
+</div>
+
+<div class="card">
+<img src="4.jfif">
+<h3>Science</h3>
+<p>IN THE NAME OF SCIENCE</p>
+<a href="science.html" role="button">Take quiz</a>
+</div>
+
+<div class="card">
+<img src="5.jfif">
+<h3>Reading</h3>
+<p>ABCDEFG</p>
+<a href="reading.html" role="button">Take quiz</a>
+</div>
+
+<div class="card">
+<img src="6.jfif">
+<h3>Foreign Language</h3>
+<p>KONICHIWANYEONG</p>
+<a href="foreign.html" role="button">Take quiz</a>
+</div>
+
+</section>
+
+<footer>
+
+<!-- Get Started section (only shown when not logged in) -->
+<div id="getStartedSection" class="get-started-left" style="display:none;">
+<h3>Ready to Test Your Knowledge?</h3>
+<p>Join thousands of students learning with WayQuizz</p>
+<a href="signup.html" class="get-started-btn">Get Started Now</a>
+</div>
+
+<!-- Footer columns -->
+<div class="footer-columns">
+<div>
+<h3>Footer</h3>
+<p>wayquizz.com</p>
+<p>wayquizztwo.com</p>
+</div>
+
+<div>
+<h3>Contact</h3>
+<p>Email Address</p>
+<p>Contact Number</p>
+</div>
+
+<div>
+<h3>Follow Us</h3>
+<p>Facebook</p>
+<p>Instagram</p>
+<p>Twitter</p>
+</div>
+</div>
+
+</footer>
+
+<script>
+function showWelcome(){
+let user=JSON.parse(localStorage.getItem("currentUser"));
+let loggedInNav = document.getElementById("loggedInNav");
+let loggedOutNav = document.getElementById("loggedOutNav");
+let welcomeMsg = document.getElementById("welcomeMsg");
+let getStartedSection = document.getElementById("getStartedSection");
+
+if(user && user.name){
+welcomeMsg.textContent="Welcome, "+user.name+"! 👋";
+loggedInNav.style.display = "block";
+loggedOutNav.style.display = "none";
+getStartedSection.style.display = "none";
+} else {
+welcomeMsg.textContent = "";
+loggedInNav.style.display = "none";
+loggedOutNav.style.display = "block";
+getStartedSection.style.display = "block";
+}
+}
+
+function logout(){
+localStorage.removeItem("currentUser");
+window.location.href="login.html";
+}
+
+showWelcome();
+</script>
+</body>
+
+</html>
+
