@@ -284,134 +284,25 @@ text-decoration:none;
 
 /* ================= FOOTER ================= */
 footer{
-background: linear-gradient(135deg, #63b7b6 0%, #5bb8b2 100%);
-padding:10px;
+background:#63b7b6;
+padding:22px 30px;
 display:flex;
-justify-content:space-between;
-align-items:flex-start;
-margin-top:auto;
-box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
-border-top: 1px solid #4a9a95;
+justify-content:space-around;
+margin-top:20px;
 }
 
 footer h3{
-color:#fff;
+margin-bottom:8px;
+border-bottom:2px solid black;
+padding-bottom:4px;
+color:#111;
 font-size:16px;
-font-weight:700;
-margin-bottom:10px;
-border-bottom: 2px solid #fff;
-padding-bottom:6px;
-text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 footer p{
-color:#f0f8f7;
-margin:6px 0;
-font-size:13px;
-line-height:1.4;
-}
-
-/* Get Started section in footer */
-.get-started-left{
-flex:1;
-text-align:left;
-margin-right:30px;
-max-width:280px;
-padding:12px;
-background: rgba(255,255,255,0.1);
-border-radius:8px;
-backdrop-filter: blur(5px);
-border: 1px solid rgba(255,255,255,0.2);
-}
-
-.get-started-left h3{
-color:#fff;
-font-size:18px;
-font-weight:700;
-margin-bottom:8px;
-text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.get-started-left p{
-color:#f0f8f7;
-font-size:13px;
-margin-bottom:12px;
-line-height:1.4;
-}
-
-.footer-columns{
-display:flex;
-gap:40px;
-align-items:flex-start;
-}
-
-.footer-columns div{
-min-width:140px;
-background: rgba(255,255,255,0.05);
-padding:10px;
-border-radius:6px;
-border: 1px solid rgba(255,255,255,0.1);
-}
-
-.get-started-btn{
-background: linear-gradient(135deg, #fff 0%, #f0f8f7 100%);
-color:#2c5f5a;
-padding:12px 24px;
-border:none;
-border-radius:20px;
+margin:4px 0;
+color:#111;
 font-size:14px;
-font-weight:700;
-cursor:pointer;
-text-decoration:none;
-display:inline-block;
-transition: all 0.3s ease;
-box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-text-transform: uppercase;
-letter-spacing: 0.5px;
-}
-
-.get-started-btn:hover{
-background: linear-gradient(135deg, #f0f8f7 0%, #e0f0ee 100%);
-transform:translateY(-2px);
-box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-
-/* Responsive footer */
-@media (max-width: 768px) {
-  footer {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px 15px;
-  }
-  
-  .get-started-left {
-    margin-right: 0;
-    margin-bottom: 20px;
-    max-width: 100%;
-    padding: 15px;
-  }
-  
-  .footer-columns {
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  .footer-columns div {
-    min-width: auto;
-  }
-}
-
-@media (max-width: 480px) {
-  footer {
-    padding: 15px 10px;
-  }
-  
-  .get-started-btn {
-    width: 100%;
-    text-align: center;
-    padding: 14px 20px;
-  }
 }
 
 </style>
@@ -520,15 +411,6 @@ box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 
 <footer>
 
-<!-- Get Started section (only shown when not logged in) -->
-<div id="getStartedSection" class="get-started-left" style="display:none;">
-<h3>Ready to Test Your Knowledge?</h3>
-<p>Join thousands of students learning with WayQuizz</p>
-<a href="signup.html" class="get-started-btn">Get Started Now</a>
-</div>
-
-<!-- Footer columns -->
-<div class="footer-columns">
 <div>
 <h3>Footer</h3>
 <p>wayquizz.com</p>
@@ -547,33 +429,29 @@ box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 <p>Instagram</p>
 <p>Twitter</p>
 </div>
-</div>
 
 </footer>
 
 <script>
 function showWelcome(){
-let user=JSON.parse(localStorage.getItem("currentUser"));
+let user=JSON.parse(localStorage.getItem("currentUser")) || JSON.parse(sessionStorage.getItem("currentUser"));
 let loggedInNav = document.getElementById("loggedInNav");
 let loggedOutNav = document.getElementById("loggedOutNav");
 let welcomeMsg = document.getElementById("welcomeMsg");
-let getStartedSection = document.getElementById("getStartedSection");
-
-if(user && user.name){
-welcomeMsg.textContent="Welcome, "+user.name+"! 👋";
+if(user){
+welcomeMsg.textContent="Welcome, junmondonedo";
 loggedInNav.style.display = "block";
 loggedOutNav.style.display = "none";
-getStartedSection.style.display = "none";
 } else {
 welcomeMsg.textContent = "";
 loggedInNav.style.display = "none";
 loggedOutNav.style.display = "block";
-getStartedSection.style.display = "block";
 }
 }
 
 function logout(){
 localStorage.removeItem("currentUser");
+sessionStorage.removeItem("currentUser");
 window.location.href="login.html";
 }
 
