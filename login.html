@@ -1,193 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>WayQuizz - Login</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
 
-body{
-height:100vh;
-display:flex;
-flex-direction:column;
-background:url("8.png") no-repeat center center/cover;
-}
+  body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: url("8.png") no-repeat center center/cover;
+  }
 
-/* NAVBAR */
-nav{
-background:#141a2a;
-padding:15px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+  /* NAVBAR */
+  nav {
+    background: #141a2a;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-color:#6edbd5;
-font-size:24px;
-font-weight:700;
-}
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #6edbd5;
+    font-size: 24px;
+    font-weight: 700;
+  }
 
-.logo img{
-height:40px;
-width:40px;
-border-radius:50%;
-object-fit:cover;
-}
+  .logo img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
-.signup-btn{
-background:#6edbd5;
-color:#111;
-padding:8px 16px;
-border:none;
-border-radius:6px;
-font-weight:600;
-cursor:pointer;
-}
+  .signup-btn {
+    background: #6edbd5;
+    color: #111;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+  }
 
-/* CENTER CONTAINER */
-.container{
-flex:1;
-display:flex;
-justify-content:center;
-align-items:center;
-}
+  /* CENTER CONTAINER */
+  .container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-/* GLASS CARD */
-.login-box{
-width:420px;
-padding:40px;
-border-radius:15px;
-background:rgba(0,0,0,0.45);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,0.2);
-color:white;
-text-align:center;
-}
+  /* GLASS CARD */
+  .login-box {
+    width: 420px;
+    padding: 40px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: center;
+  }
 
-.login-box h2{
-margin-bottom:30px;
-font-size:28px;
-color:#f2e9b8;
-}
+  .login-box h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #f2e9b8;
+  }
 
-/* INPUT GROUP */
-.input-group{
-position:relative;
-margin:20px 0;
-}
+  /* INPUT GROUP */
+  .input-group {
+    position: relative;
+    margin: 20px 0;
+  }
 
-.input-group input{
-width:100%;
-padding:12px 40px 12px 10px;
-background:transparent;
-border:none;
-border-bottom:1px solid #ccc;
-color:white;
-font-size:15px;
-outline:none;
-}
+  .input-group input {
+    width: 100%;
+    padding: 12px 40px 12px 10px;
+    background: #dfe8ffcc; /* lighter background for input */
+    border: none;
+    border-bottom: 1px solid #ccc;
+    color: #111;
+    font-size: 15px;
+    outline: none;
+    border-radius: 4px;
+  }
 
-.input-group span{
-position:absolute;
-right:10px;
-top:50%;
-transform:translateY(-50%);
-color:#f2e9b8;
-font-size:18px;
-}
+  /* Icon inside inputs */
+  .input-group span {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+  }
 
-/* OPTIONS */
-.options{
-display:flex;
-justify-content:space-between;
-font-size:14px;
-margin:15px 0;
-}
+  /* Different icon colors matching screenshot */
+  .input-group span.email-icon {
+    color: #f1e19b;
+  }
 
-.options a{
-color:#f2e9b8;
-text-decoration:none;
-}
+  .input-group span.lock-icon {
+    color: #f6c200;
+  }
 
-/* LOGIN BUTTON */
-.login-btn{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:6px;
-background:#63b7b6;
-font-weight:600;
-font-size:16px;
-cursor:pointer;
-transition:0.3s;
-}
+  /* OPTIONS */
+  .options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 15px 0;
+    color: #f2e9b8;
+  }
 
-.login-btn:hover{
-opacity:0.9;
-}
+  .options a {
+    color: #f2e9b8;
+    text-decoration: none;
+  }
 
-/* DIVIDER */
-.divider{
-margin:25px 0;
-display:flex;
-align-items:center;
-gap:10px;
-}
+  /* LOGIN BUTTON */
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #63b7b6;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
-.divider hr{
-flex:1;
-border:none;
-height:1px;
-background:#aaa;
-}
+  .login-btn:hover {
+    opacity: 0.9;
+  }
 
-.divider span{
-font-size:14px;
-}
+  /* DIVIDER */
+  .divider {
+    margin: 25px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f2e9b8;
+    font-size: 14px;
+  }
 
-/* SOCIAL BUTTONS */
-.social{
-display:flex;
-justify-content:center;
-gap:15px;
-}
+  .divider hr {
+    flex: 1;
+    border: none;
+    height: 1px;
+    background: #aaa;
+    opacity: 0.6;
+  }
 
-.social button{
-width:45px;
-height:45px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-size:18px;
-background:#1e2433;
-color:white;
-}
+  /* SOCIAL BUTTONS */
+  .social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
 
+  .social button {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    background: #1e2433;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Individual social button colors */
+  .social button.telegram {
+    background-color: #0088cc;
+  }
+
+  .social button.google {
+    background-color: #db4437;
+  }
+
+  .social button.facebook {
+    background-color: #1877f2;
+  }
+
+  .social button:hover {
+    opacity: 0.85;
+  }
 </style>
 </head>
 
 <body>
 
-<nav>
-<div class="logo"><img src="2.jpg" alt="WayQuizz Logo">WayQuizz</div>
-<a href="signup.html">
-<button class="signup-btn">Sign Up</button>
-</a>
-</nav>
 <nav>
   <div class="logo"><img src="2.jpg" alt="WayQuizz Logo" />WayQuizz</div>
   <a href="signup.html"><button class="signup-btn">Sign Up</button></a>
@@ -228,34 +252,67 @@ color:white;
   </div>
 </div>
 
-  </div>
-</div>
-</div>
-
 <script>
-function login(){
-let name=document.getElementById("name").value;
-let email=document.getElementById("email").value;
-let password=document.getElementById("password").value;
+  window.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("loginForm");
 
-if(!name || !email || !password){
-alert("Please fill in all fields");
-return;
-}
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-// Check if user exists in stored accounts
-let storedUser = JSON.parse(localStorage.getItem("user"));
-if(storedUser && storedUser.username === name && storedUser.email === email && storedUser.password === password){
-    // Set as current user for session
-    let currentUser = {name: storedUser.username, email: storedUser.email};
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    window.location.href="index.html";
-} else {
-    alert("Invalid credentials. Please check your information or sign up first.");
-}
-}
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const rememberMe = document.getElementById("rememberMe").checked;
+
+      let errorMsg = "";
+
+      if (!email) {
+        errorMsg += "Email is required.\n";
+      } else {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          errorMsg += "Please enter a valid email address.\n";
+        }
+      }
+
+      if (!password) {
+        errorMsg += "Password is required.\n";
+      } else if (password.length < 6) {
+        errorMsg += "Password must be at least 6 characters long.\n";
+      }
+
+      if (errorMsg) {
+        alert(errorMsg);
+        return;
+      }
+
+      // Check users list first (new signup format), then fallback to old single-user format
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const legacyUser = JSON.parse(localStorage.getItem("user"));
+
+      const matchedUser =
+        users.find((u) => u.email === email && u.password === password) ||
+        (legacyUser && legacyUser.email === email && legacyUser.password === password
+          ? legacyUser
+          : null);
+
+      if (matchedUser) {
+        // Save session info, manage rememberMe option
+        const currentUser = { email: matchedUser.email, name: matchedUser.username || "" };
+
+        if (rememberMe) {
+          localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        } else {
+          sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
+        }
+
+        // Redirect to homepage
+        window.location.href = "index.html";
+      } else {
+        alert("Invalid credentials. Please check your information or sign up first.");
+      }
+    });
+  });
 </script>
 
 </body>
 </html>
-
