@@ -194,37 +194,39 @@ color:white;
 <div class="login-box">
 <h2>Welcome to WayQuizz</h2>
 
-<div class="input-group">
-<input type="text" placeholder="Full Name" id="name">
-<span>👤</span>
-</div>
+<div class="container">
+  <div class="login-box">
+    <h2>Welcome Back</h2>
 
-<div class="input-group">
-<input type="email" placeholder="Email" id="email">
-<span>✉</span>
-</div>
+    <form id="loginForm" novalidate>
+      <div class="input-group">
+        <input type="email" placeholder="Email" id="email" name="email" required />
+        <span class="email-icon">✉</span>
+      </div>
 
-<div class="input-group">
-<input type="password" placeholder="Password" id="password">
-<span>🔒</span>
-</div>
+      <div class="input-group">
+        <input type="password" placeholder="Password" id="password" name="password" required />
+        <span class="lock-icon">🔒</span>
+      </div>
 
-<div class="options">
-<label><input type="checkbox"> Remember me</label>
-<a href="#">Forgot Password?</a>
-</div>
+      <div class="options">
+        <label><input type="checkbox" id="rememberMe" /> Remember me</label>
+        <a href="#">Forgot Password?</a>
+      </div>
 
-<button class="login-btn" onclick="login()">Log in</button>
+      <button type="submit" class="login-btn">Log In</button>
+    </form>
 
-<div class="divider">
-<hr><span>or continue with</span><hr>
-</div>
+    <div class="divider">
+      <hr /><span>or continue with</span><hr />
+    </div>
 
-<div class="social">
-<button>✉</button>
-<button></button>
-</div>
-        
+    <div class="social">
+      <button class="telegram" title="Continue with Telegram">✈️</button>
+      <button class="google" title="Continue with Google">G</button>
+      <button class="facebook" title="Continue with Facebook">f</button>
+    </div>
+  </div>
 </div>
 </div>
 
