@@ -1,102 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>WayQuizz - Sign Up</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{
-background:url("8.png") no-repeat center center/cover;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-.form-box{
-background:#2b3245;
-padding:40px;
-border-radius:12px;
-width:350px;
-text-align:center;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
 
-input{
-width:100%;
-padding:10px;
-margin:10px 0;
-border:none;
-border-radius:6px;
-}
+  body, html {
+    height: 100%;
+    background: url("8.png") no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-button{
-width:100%;
-padding:10px;
-background:#6edbd5;
-border:none;
-border-radius:6px;
-font-weight:600;
-cursor:pointer;
-}
+  .glass-card {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 40px 35px;
+    width: 420px;
+    color: #f2e9b8;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    text-align: center;
+  }
 
-a{
-color:#6edbd5;
-text-decoration:none;
-display:block;
-margin-top:15px;
-}
+  .glass-card h2 {
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 6px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.2;
+  }
 
-h2{
-font-size:32px;
-font-weight:700;
-margin-bottom:30px;
-color:#ffd700;
-}
+  .subtitle {
+    font-size: 16px;
+    color: #7ea2c8;
+    margin-bottom: 22px;
+    text-align: center;
+  }
+
+  .field-label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 600;
+    margin: 10px 0 8px;
+  }
+
+  .input-group {
+    position: relative;
+    margin-bottom: 18px;
+  }
+
+  .input-group input {
+    width: 100%;
+    border: 1px solid #2a3346;
+    border-radius: 14px;
+    background: #1f2a3f;
+    color: #f2e9b8;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 14px 16px;
+    outline: none;
+  }
+
+  .input-group input::placeholder {
+    color: #6f8ca8;
+  }
+
+  button.sign-up-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px 0;
+    background: #38d7cf;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    color: #111;
+    transition: background-color 0.3s ease;
+  }
+
+  button.sign-up-btn:hover {
+    background-color: #2fc3bc;
+  }
+
+  .login-text {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #7ea2c8;
+  }
+
+  .login-text a {
+    color: #38d7cf;
+    text-decoration: none;
+    font-weight: 700;
+  }
 </style>
 </head>
 
 <body>
 
-    
-<div class="form-box">
-<h2>Welcome to WayQuizz</h2>
+<div class="glass-card">
+  <h2>Create Account</h2>
+  <p class="subtitle">Welcome to WayQuizz</p>
 
-<input type="text" id="username" placeholder="Username">
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
+  <form id="signupForm" novalidate>
+    <label class="field-label" for="username">Full Name</label>
+    <div class="input-group">
+      <input type="text" id="username" placeholder="John Doe" required />
+    </div>
 
-<button onclick="signup()">Sign Up</button>
+    <label class="field-label" for="email">Email</label>
+    <div class="input-group">
+      <input type="email" id="email" placeholder="junmondonedo18@gmail.com" required />
+    </div>
 
-<a href="login.html">Already have an account? Login</a>
+    <label class="field-label" for="password">Password</label>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="•••••••" required />
+    </div>
+
+    <button type="submit" class="sign-up-btn">Sign Up</button>
+    <p class="login-text">
+      Already have an account? <a href="login.html">Log In</a>
+    </p>
+  </form>
 </div>
 
 <script>
-function signup(){
-let username=document.getElementById("username").value;
-let email=document.getElementById("email").value;
-let password=document.getElementById("password").value;
+  document.getElementById("signupForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-if(username===""||email===""||password===""){
-alert("Please fill all fields");
-return;
-}
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-let user={
-username:username,
-email:email,
-password:password
-};
+    let errorMsg = "";
 
-localStorage.setItem("user",JSON.stringify(user));
+    if (!username) errorMsg += "Full Name is required.\n";
 
-alert("Account created successfully!");
-window.location.href="login.html";
-}
+    if (!email) {
+      errorMsg += "Email is required.\n";
+    } else {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email))
+        errorMsg += "Please enter a valid email address.\n";
+    }
+
+    if (!password) {
+      errorMsg += "Password is required.\n";
+    } else if (password.length < 6) {
+      errorMsg += "Password must be at least 6 characters long.\n";
+    }
+
+    if (errorMsg) {
+      alert(errorMsg);
+      return;
+    }
+
+    // Save users as an array (supports multiple signups)
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const existingUser = users.find(
+      (u) => (u.email || "").toLowerCase() === email.toLowerCase()
+    );
+
+    if (existingUser) {
+      alert("Email is already registered. Please log in.");
+      return;
+    }
+
+    const user = { username, email, password };
+    users.push(user);
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    // Backward compatibility with old login logic
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Account created successfully!");
+    window.location.href = "login.html";
+  });
 </script>
 
 </body>
