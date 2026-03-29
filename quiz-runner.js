@@ -301,6 +301,19 @@
 
   function $(s,root=document){return root.querySelector(s)}
 
+  const nextCategoryMap = {
+    math_addition: 'math_subtraction',
+    math_subtraction: 'math_multiplication',
+    math_multiplication: 'math_division',
+    math_division: 'math_fractions',
+    math_fractions: 'math_decimals',
+    math_decimals: 'math_percents',
+    math_percents: 'math_negatives',
+    pre_number_properties: 'pre_variables',
+    pre_variables: 'pre_algebraic_expressions',
+    pre_algebraic_expressions: 'pre_one_step_equations'
+  };
+
   function renderQuiz(category){
     const data = quizzes[category] || [];
     const state = {i:0,score:0,questions:data};
@@ -310,54 +323,112 @@
       const item = state.questions[state.i];
       root.innerHTML = '';
       const card = document.createElement('div'); card.className='quiz-card';
-      // header with subtopic title
+
+      const top = document.createElement('div'); top.className = 'quiz-top';
       const hdr = document.createElement('div'); hdr.className='quiz-header'; hdr.textContent = titles[category] || category;
-      card.appendChild(hdr);
+      const count = document.createElement('div'); count.className='quiz-count'; count.textContent = `${state.i + 1} / ${state.questions.length}`;
+      top.appendChild(hdr); top.appendChild(count);
+      card.appendChild(top);
+
+      const progressWrap = document.createElement('div'); progressWrap.className = 'quiz-progress-wrap';
+      const progress = document.createElement('div'); progress.className = 'quiz-progress';
+      const progressFill = document.createElement('div'); progressFill.className = 'quiz-progress-fill';
+      progressFill.style.width = `${((state.i + 1) / state.questions.length) * 100}%`;
+      progress.appendChild(progressFill);
+      progressWrap.appendChild(progress);
+      card.appendChild(progressWrap);
+
       const q = document.createElement('div'); q.className='quiz-question'; q.textContent = item.q; card.appendChild(q);
+
       const opts = document.createElement('div'); opts.className='quiz-options';
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
       item.opts.forEach((opt,idx)=>{
-        const b = document.createElement('button'); b.className='option'; b.textContent = opt; b.disabled=false;
+        const b = document.createElement('button'); b.className='option'; b.disabled=false;
+
+        const left = document.createElement('span'); left.className = 'option-letter'; left.textContent = letters[idx] || '';
+        const text = document.createElement('span'); text.className = 'option-text'; text.textContent = opt;
+        const icon = document.createElement('span'); icon.className = 'option-icon'; icon.innerHTML = '';
+
+        b.appendChild(left); b.appendChild(text); b.appendChild(icon);
+
         b.addEventListener('click', ()=>{
-          // disable all
           opts.querySelectorAll('.option').forEach(o=>{o.disabled=true; o.classList.add('disabled')});
-          if(idx===item.a){ b.classList.add('correct'); state.score++; } else { b.classList.add('wrong'); opts.children[item.a].classList.add('correct'); }
+
+          if(idx===item.a){
+            b.classList.add('correct');
+            b.querySelector('.option-icon').innerHTML = '✓';
+            state.score++;
+          } else {
+            b.classList.add('wrong');
+            b.querySelector('.option-icon').innerHTML = '✕';
+            const correctBtn = opts.children[item.a];
+            correctBtn.classList.add('correct');
+            const correctIcon = correctBtn.querySelector('.option-icon');
+            if(correctIcon) correctIcon.innerHTML = '✓';
+          }
         });
+
         opts.appendChild(b);
       });
+
       card.appendChild(opts);
       const footer = document.createElement('div'); footer.className='quiz-footer';
-      const next = document.createElement('button'); next.className='btn-next'; next.textContent='Next';
+      const next = document.createElement('button'); next.className='btn-next'; next.textContent='Next Question';
       next.addEventListener('click', ()=>{
         if(state.i < state.questions.length-1){ state.i++; showQuestion(); } else { showResult(); }
       });
       footer.appendChild(next);
       card.appendChild(footer);
-      // ensure overlay is visible
+
       root.appendChild(card);
-      // animate card in
       requestAnimationFrame(()=>{ card.style.opacity = '1'; card.style.transform = 'none'; });
     }
 
     function showResult(){
       root.innerHTML='';
-      const card = document.createElement('div'); card.className='quiz-card';
-      const res = document.createElement('div'); res.className='quiz-result';
+      const card = document.createElement('div');
+      card.className='quiz-card quiz-result-card';
+
       const total = state.questions.length;
       const pct = total ? Math.round((state.score / total) * 100) : 0;
+
       let message = '';
-      if(pct === 100) message = 'Perfect!';
+      if(pct === 100) message = 'Excellent!';
       else if(pct >= 80) message = "You're so good!";
       else if(pct >= 50) message = 'Good job!';
-      else message = 'Keep trying!';
+      else message = 'Keep practicing!';
+
+      const titleText = titles[category] || category;
+      const titlePrefix = titleText.toLowerCase().includes('math') ? titleText : `${titleText}`;
+
+      const res = document.createElement('div');
+      res.className='quiz-result';
+
+      const ringSize = 190;
+      const ringStroke = 18;
+      const r = (ringSize / 2) - ringStroke;
+      const c = 2 * Math.PI * r;
+      const offset = c - (pct / 100) * c;
 
       res.innerHTML = `
-        <div class="result-badge">${pct}%</div>
-        <div class="result-title">${message}</div>
-        <p class="result-sub">You scored ${state.score} / ${total}</p>
+        <div class="result-heading-wrap">
+          <div class="result-heading-main">📚 ${message}</div>
+          <div class="result-heading-sub">${titlePrefix} Quiz Results</div>
+        </div>
+
+        <div class="result-ring-wrap">
+          <svg class="result-ring" width="${ringSize}" height="${ringSize}" viewBox="0 0 ${ringSize} ${ringSize}" aria-label="Score percentage">
+            <circle class="result-ring-track" cx="${ringSize/2}" cy="${ringSize/2}" r="${r}"></circle>
+            <circle class="result-ring-value" cx="${ringSize/2}" cy="${ringSize/2}" r="${r}" style="stroke-dasharray:${c};stroke-dashoffset:${offset}"></circle>
+          </svg>
+          <div class="result-ring-label">${pct}%</div>
+        </div>
+
+        <p class="result-score-line">You scored <span>${state.score}</span> out of ${total}</p>
       `;
       card.appendChild(res);
 
-      // save score to localStorage under a unified key
       try{
         const key = 'wayquizz_scores';
         const raw = localStorage.getItem(key);
@@ -367,15 +438,29 @@
         localStorage.setItem(key, JSON.stringify(store));
       }catch(e){ console.warn('Could not save score', e); }
 
-      const footer = document.createElement('div'); footer.style.display='flex'; footer.style.justifyContent='center'; footer.style.gap='12px'; footer.style.marginTop='12px';
+      const footer = document.createElement('div');
+      footer.className = 'result-actions';
 
-      const retry = document.createElement('button'); retry.className='btn-next'; retry.textContent='Retry';
+      const retry = document.createElement('button');
+      retry.className='btn-next btn-result-primary';
+      retry.textContent='Try Again';
       retry.addEventListener('click', ()=>{ state.i = 0; state.score = 0; showQuestion(); });
 
-      const backMain = document.createElement('button'); backMain.className='btn-next'; backMain.textContent='Back to Topics';
-      backMain.style.background = '#63b7b6';
-      backMain.addEventListener('click', ()=>{
-        // hide quiz root and show main content if present
+      footer.appendChild(retry);
+
+      const nextCategory = nextCategoryMap[category];
+      if(nextCategory){
+        const nextBtn = document.createElement('button');
+        nextBtn.className='btn-next btn-result-secondary';
+        nextBtn.textContent='Next Category';
+        nextBtn.addEventListener('click', ()=>{ renderQuiz(nextCategory); });
+        footer.appendChild(nextBtn);
+      }
+
+      const endQuiz = document.createElement('button');
+      endQuiz.className='btn-next btn-result-secondary';
+      endQuiz.textContent='End Quiz';
+      endQuiz.addEventListener('click', ()=>{
         const main = document.getElementById('main-content');
         if(main) main.style.display = '';
         root.style.display = 'none';
@@ -383,21 +468,19 @@
         root.innerHTML = '';
       });
 
-      footer.appendChild(retry);
-      footer.appendChild(backMain);
+      footer.appendChild(endQuiz);
       card.appendChild(footer);
       root.appendChild(card);
 
-      // celebrate on high scores
       if(pct >= 80){
-        // small delay so result is visible then play effects
         setTimeout(()=>{
-          // more confetti for perfect
           runConfetti(pct === 100 ? 160 : 80);
           playCheer(pct === 100 ? 0.12 : 0.06, pct === 100 ? 0.3 : 0.18);
-          // add an emoji to result title for extra flair
-          const emoji = document.createElement('div'); emoji.className = 'celebrate-emoji'; emoji.textContent = pct === 100 ? '🎉' : '👏';
-          res.insertBefore(emoji, res.firstChild);
+          const emoji = document.createElement('div');
+          emoji.className = 'celebrate-emoji';
+          emoji.textContent = pct === 100 ? '🏅' : '👏';
+          const heading = res.querySelector('.result-heading-wrap');
+          if(heading) heading.insertBefore(emoji, heading.firstChild);
         }, 240);
       }
     }
@@ -406,9 +489,9 @@
   }
 
   window.startQuiz = function(category){
-    // Check if user is logged in
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-    if(!user || !user.name){
+    // Check if user is logged in (supports rememberMe and session login)
+    const user = JSON.parse(localStorage.getItem("currentUser")) || JSON.parse(sessionStorage.getItem("currentUser"));
+    if(!user){
       alert("Please log in first to take quizzes!");
       window.location.href = "login.html";
       return;
