@@ -1,1 +1,0 @@
-WayQuiz is an interactive web-based quiz platform designed to make learning fun, engaging, and trackable. It allows users to take quizzes, monitor their progress, and improve their knowledge through a simple and modern interface.
